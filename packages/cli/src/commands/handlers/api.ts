@@ -43,7 +43,7 @@ export default Runtime.handler(
       }),
     )
     if (response.headers.get("content-type")?.split(";")[0].trim().toLowerCase() === "text/event-stream") {
-      yield* Effect.tryPromise(() => writeEventStream(response.body))
+      yield* Effect.promise(() => writeEventStream(response.body))
       if (!response.ok) {
         process.stderr.write(`HTTP ${response.status} ${response.statusText}${EOL}`)
         process.exitCode = 1
